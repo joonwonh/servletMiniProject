@@ -54,30 +54,43 @@ public class SignUpDAO {
 		}
     }
     
-    public void conFirm(SignUpDTO dto)	{
+    public boolean conFirm(SignUpDTO dto)	{
     	try	{
     		conn = getConnection();
     		pstmt = conn.prepareStatement("SELECT id, pw FROM BOARD_CUSTOMER WHERE ID=? AND PW=?");
-    		rs = pstmt.executeQuery();
+    		
     		
     		pstmt.setString(1, dto.getId());
     		pstmt.setString(2, dto.getPw());
-    		
-    		
-    		while(rs.next())		{
-    			String id = rs.getString("id");
-    			String pw = rs.getString("pw");
-
-        		
-
+    		rs = pstmt.executeQuery();
+    			
+    		if(rs.next())		{
+    			return true;
     		}
-
-    		
+    		else
+    			return false;
     		
     	}catch(Exception e)	{
-    		
+    		e.printStackTrace();
+    		return false;
+    	}   
+    	finally	{
+    		try	{
+    			if(rs!=null) {
+    				rs.close();
+    			}
+    			if(pstmt!=null) {
+    				pstmt.close();
+    			}
+    			if(conn!=null) {
+    				conn.close();
+    			}
+    			
+    		}
+    		catch(SQLException e)	{
+    			e.printStackTrace();
+    		}
     	}
-    	
     }
     
     

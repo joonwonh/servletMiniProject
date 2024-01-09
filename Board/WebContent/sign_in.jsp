@@ -7,7 +7,7 @@
 <title>로그인 창</title>
 </head>
 <body>
-  <form name="frmLogin" method="post" action="signin" enctype="UTF-8">
+  <form name="frmLogin" method="post" action="signIn" enctype="UTF-8">
     아이디 : <input type="text" name="id"><br>
     비밀번호 : <input type="password" name="pw"><br>
         <input type="submit" value="로그인">

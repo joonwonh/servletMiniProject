@@ -1,5 +1,9 @@
 package customer.signin.service;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,14 +18,16 @@ public class SignInService {
 		signUpDAO = SignUpDAO.getInstance();
 	}
 	
-	public void excute(HttpServletRequest request, HttpServletResponse response)	{
+	public boolean excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException	{
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
 		SignUpDTO confirm = new SignUpDTO(id, pw); 
 		
-		signUpDAO.conFirm(confirm);
+		return signUpDAO.conFirm(confirm);
+		
+		
 		
 	}
 	

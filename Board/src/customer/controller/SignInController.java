@@ -30,9 +30,15 @@ public class SignInController extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		SignInService signin = new SignInService(); 
-		signin.excute(request, response);
-		RequestDispatcher dis = request.getRequestDispatcher("/Board/board.jsp");
-		dis.forward(request, response);
+		boolean isConfirm = signin.excute(request, response);
+		if(isConfirm == true)	{
+			RequestDispatcher success = request.getRequestDispatcher("/board.jsp");
+			success.forward(request, response);
+		}
+		else {
+			RequestDispatcher fail = request.getRequestDispatcher("/sign_in_fail.jsp");
+			fail.forward(request, response);
+		}
 		
 	}
 
